@@ -4,7 +4,7 @@ create database kontaktiwp16;
 use kontaktiwp16;
 
 create table osoba(
-sifra int not null primary key,
+sifra int not null primary key auto_increment,
 ime varchar(40) not null,
 spol boolean not null,
 datumrodjenja datetime not null,
@@ -13,7 +13,7 @@ nadimak varchar(40)
 );
 
 create table kontakt(
-sifra int not null primary key,
+sifra int not null primary key auto_increment,
 osoba int not null,
 telefon varchar(30) not null
 
