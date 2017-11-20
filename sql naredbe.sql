@@ -34,3 +34,19 @@ insert into polaznik(osoba,brojugovora)
 values ('00000000002','2017/25');
 
 select * from polaznik;
+
+insert into clan(grupa,polaznik)
+values(1,1);
+
+select * from clan;
+
+select * from primjerak;
+
+insert into primjerak(autor,naziv,cijena)
+values('August Senoa', 'Zlatarevo zlato', 200);
+
+insert into primjerak(autor,naziv,cijena)
+values('Dobrisa Cesaric', 'Povratak', 150);
+
+insert into primjerak(autor,naziv,cijena)
+values('Mato Lovrak', 'Vlak u snijegu', 220);
