@@ -1,52 +1,85 @@
 select * from smjer;
 
-#dobra
-insert into smjer(naziv,cijena,upisnina,brojsati)
-values ('PHP programiranje',2000.50,500,130);
+#dobar
+insert into smjer(naziv, trajanje) 
+values ('Java programiranje', 130);
 
-#dobra
-insert into smjer(naziv,cijena,upisnina,brojsati)
-values ('PHP programiranje',2000.50,500,130);
+#dobar
+insert into smjer (cijena, naziv, trajanje, upisnina)
+values (3999.99, 'PHP programiranje', 130, null);
 
-#loša
-insert into smjer values(null,'Java programiranje',5000,500,130);
+#los
+insert into smjer values (null, 'Serviser', null, null, 100);
+
+#najbolja
+insert into smjer (sifra, naziv, cijena, upisnina, trajanje) 
+values (null, 'Operator', 2000, 500, 80);
+
+insert into osoba (oib, ime, prezime, email, spol) 
+values ('00000000001', 'Tomislav', 'Jakopec', 'tjakopec@gmail.com', true);
 
 select * from osoba;
-#najbolja 
-insert into osoba(oib,ime,prezime,email,spol)
-values('00000000001','Maja','Mala',null,null);
 
-#dobra
-insert into osoba(oib,ime,prezime)
-values('00000000002', 'Pero', 'Perić');
+insert into osoba (oib, ime, prezime, email, spol) 
+values 
+('00000000002','žćšž','ŠĐĆČ','gg',true),
+('00000000003','','','',true),
+('00000000004','','','',true),
+('00000000005','','','',true);
+
+insert into predavac (sifra,osoba, placa) 
+values (null, '00000000001', 5000);
 
 select * from predavac;
 
-insert into predavac(osoba,placa)
-values('00000000001',1000);
-
-insert into grupa(naziv, predavac, smjer, datumpocetka)
-values('PP16', 1, 1,'2017-10-28');
+insert into grupa (sifra,naziv,datumpocetka,smjer,predavac)
+values(null, 'Java programiranje','2017-10-28',1,2);
 
 select * from grupa;
 
-insert into polaznik(osoba,brojugovora)
-values ('00000000002','2017/25');
+insert into polaznik(sifra, osoba, brojugovora) 
+values 
+(null, '00000000002', '1234'),
+(null, '00000000003', '1235'),
+(null, '00000000004', '1236');
 
 select * from polaznik;
 
-insert into clan(grupa,polaznik)
-values(1,1);
+insert into clan (grupa, polaznik)
+values (2,1),(2,2),(2,3);
 
 select * from clan;
 
-select * from primjerak;
+select * from osoba;
+select * from osoba where oib='00000000002';
+update osoba set prezime='Nešto' where oib='00000000002'; 
 
-insert into primjerak(autor,naziv,cijena)
-values('August Senoa', 'Zlatarevo zlato', 200);
+select * from osoba where oib='00000000010';
+update osoba set 
+ime='Vedrana',
+prezime='Mišćević',
+email='vedrana.miscevic@sgmail.com',
+spol=false where oib='00000000010'; 
 
-insert into primjerak(autor,naziv,cijena)
-values('Dobrisa Cesaric', 'Povratak', 150);
+#zadatak
+#preimenujte smjer u Računalni operator u Operater računala
+select * from smjer;
 
-insert into primjerak(autor,naziv,cijena)
-values('Mato Lovrak', 'Vlak u snijegu', 220);
+update smjer set
+naziv='Operater računala' where sifra=3;
+
+#unesite novi smjer
+insert into smjer (sifra, naziv, cijena, upisnina, brojsati) 
+values (null, 'Arduino programiranje', 2000, 500, 80);
+
+#zadnje unesenom smjeru promijenite podatke na 
+#naziv EU PROJEKTI 
+#cijena 7000 kn
+#upisnina 0.99kn
+#broj sati 180
+
+update smjer set
+naziv='EU PROJEKTI',
+cijena=7000,
+upisnina=0.99,
+brojsati=180 where sifra=5;
