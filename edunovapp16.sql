@@ -1,7 +1,7 @@
 #c:\xampp\mysql\bin\msysql.exe -edunova -pedunova --default_character_set=utf8 < d:\edunovapp16.sql
 
 drop database if exists edunovapp16;
-create database edunovapp16 character set utf8;
+create database edunovapp16 character set utf8 collate utf8_croatian_ci;
 
 use edunovapp16;
 
