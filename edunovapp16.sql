@@ -1,4 +1,4 @@
-#c:\xampp\mysql\bin\msysql.exe -edunova -pedunova --default_character_set=utf8 < d:\edunovapp16.sql
+#c:\xampp\mysql\bin\msysql.exe -edunova -pedunova --default_character_set=utf8 < d:\sqlwp16\edunovapp16.sql
 
 drop database if exists edunovapp16;
 create database edunovapp16 character set utf8 collate utf8_croatian_ci;
@@ -23,18 +23,19 @@ datumpocetka datetime
 
 create table predavac(
 sifra int not null primary key auto_increment,
-osoba char(11) not null,
+osoba int not null,
 placa decimal(18,2)
 );
 
 create table polaznik(
 sifra int not null primary key auto_increment,
-osoba char(11) not null,
+osoba int not null,
 brojugovora varchar(20) not null
 );
 
 create table osoba(
-oib char(11) not null primary key,
+	sifra int not null primary key auto_increment,
+oib char(11) not null,
 ime varchar(50) not null default 'Ana',
 prezime varchar(50) not null,
 email varchar(100),
@@ -47,13 +48,14 @@ polaznik int not null
 );
 
 
+create unique index ix_oib on osoba(oib);
 
 alter table grupa add foreign key (smjer) references smjer(sifra);
 alter table grupa add foreign key (predavac) references predavac(sifra);
 
-alter table predavac add foreign key (osoba) references osoba(oib);
+alter table predavac add foreign key (osoba) references osoba(sifra);
 
-alter table polaznik add foreign key (osoba) references osoba(oib);
+alter table polaznik add foreign key (osoba) references osoba(sifra);
 
 alter table clan add foreign key (grupa) references grupa(sifra);
 alter table clan add foreign key (polaznik) references polaznik(sifra);
@@ -65,7 +67,8 @@ insert into smjer(sifra,naziv,cijena,upisnina,brojsati) values
 (null,'Serviser računala',2000,500,130);
 
 insert into osoba (oib,ime,prezime,email,spol) values
-('00000000000','Tomislav','Jakopec','tjakopec@gmail.com',1),
+('45723778311
+Dodaj HR Na početak','Tomislav','Jakopec','tjakopec@gmail.com',1),
 ('00000000001','Josip','Abramović','jabramovic95@gmail.com',1),
 ('00000000002','Ana Maria','Anić','anicanamaria@gmail.com',0),
 ('00000000003','Vedran','Baričević','veco444@gmail.com',1),
@@ -88,34 +91,35 @@ insert into osoba (oib,ime,prezime,email,spol) values
 ('00000000020','Domagoj','Glavačević','glavacevic.d@gmail.com',1),
 ('00000000021','Davor','Ilišević','davor.ilisevic1@gmail.com',1);
 
-insert into predavac (osoba,placa) values ('00000000000',5000);
+insert into predavac (osoba,placa) values (1,5000);
 
 insert into grupa(naziv,smjer,predavac,datumpocetka) values
 ('PP16',1,1,'2017-10-28'),
 ('J17',2,1,'2017-10-28');
 
 insert into polaznik (osoba,brojugovora) values
-('00000000001',''),
-('00000000002',''),
-('00000000003',''),
-('00000000004',''),
-('00000000005',''),
-('00000000006',''),
-('00000000007',''),
-('00000000008',''),
-('00000000009',''),
-('00000000010',''),
-('00000000011',''),
-('00000000012',''),
-('00000000013',''),
-('00000000014',''),
-('00000000015',''),
-('00000000016',''),
-('00000000017',''),
-('00000000018',''),
-('00000000019',''),
-('00000000020',''),
-('00000000021','');
+(2,''),
+(3,''),
+(4,''),
+(5,''),
+(6,''),
+(7,''),
+(8,''),
+(9,''),
+(10,''),
+(11,''),
+(12,''),
+(13,''),
+(14,''),
+(15,''),
+(16,''),
+(17,''),
+(18,''),
+(19,''),
+(20,''),
+(21,''),
+(22,'');
+
 
 insert into clan(grupa,polaznik) values 
 (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10), (1,11), (1,12), (1,13), (1,14), (1,15), (1,16), (1,17), (1,18), (1,19), (1,20),(1,21),(2,1),(2,21); 

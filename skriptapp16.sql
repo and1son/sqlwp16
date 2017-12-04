@@ -21,18 +21,19 @@ datumpocetka datetime
 
 create table predavac(
 sifra int not null primary key auto_increment,
-osoba char(11) not null,
+osoba int not null,
 placa decimal(18,2)
 );
 
 create table polaznik(
 sifra int not null primary key auto_increment,
-osoba char(11) not null,
+osoba int not null,
 brojugovora varchar(20) not null
 );
 
 create table osoba(
-oib char(11) not null primary key,
+sifra int not null primary key auto_increment,
+oib char(11) not null,
 ime varchar(50) not null default 'Ana',
 prezime varchar(50) not null,
 email varchar(100),
