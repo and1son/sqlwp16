@@ -20,7 +20,7 @@ provjeraOvlasti();
       	
       	<div class="grid-x grid-padding-x">
 			<div class="large-12 cell">
-				<a href="novi.php" class="button expanded"><i class="fas fa-plus-circle fa-2x"></i></a>
+				<a href="novi.php" class="button success expanded"><i class="fas fa-plus-circle fa-2x"></i></a>
 				<table>
 					<thead>
 						<tr>

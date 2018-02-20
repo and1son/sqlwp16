@@ -4,6 +4,9 @@
 drop database if exists edunovapp16;
 create database edunovapp16 character set utf8 collate utf8_croatian_ci;
 
+#za byethost
+alter database character set utf8 collate utf8_croatian_ci;
+
 use edunovapp16;
 
 create table operater(

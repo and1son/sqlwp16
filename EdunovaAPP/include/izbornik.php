@@ -44,4 +44,19 @@
       
     </ul>
   </div>
+  <?php if($_SERVER["PHP_SELF"]!==$putanjaAPP . "login.php"): ?>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li style="width: 100%;"><?php if(!isset($_SESSION[$appID."autoriziran"])): ?>
+	  		<a href="<?php echo $putanjaAPP; ?>login.php" class="button">Prijava</a>
+	  	<?php else: ?>
+	  		<a href="<?php echo $putanjaAPP; ?>logout.php" class="button">Odjava <?php 
+	  		
+	  			echo $_SESSION[$appID."autoriziran"]->ime;
+	  			
+	  			?></a>
+	  	<?php endif;?></li>
+    </ul>
+  </div>
+  <?php endif;?>
 </div>

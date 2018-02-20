@@ -10,8 +10,11 @@
       	<?php include_once 'include/izbornik.php'; ?>
       	
       	<div class="grid-x grid-padding-x">
-			<div class="large-12 cell" style="min-height: 500px;">
-				Dobrodošli na <?php echo $naslovAPP; ?>
+			<div class="large-4 large-offset-2 cell centered">
+				<video poster="<?php echo $putanjaAPP ?>img/logo.png" width="640" height="360" autoplay loop>
+		          <source src="<?php echo $putanjaAPP ?>img/logo.webm" type="video/webm" codecs="vp8">
+		        </video>
+
 			</div>
 		</div>
 		<?php include_once 'include/podnozje.php'; ?>
