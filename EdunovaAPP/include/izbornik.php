@@ -21,6 +21,9 @@
 				stavkaIzbornika($putanjaAPP . "privatno/grupe/index.php", "Grupe"); 
 				stavkaIzbornika($putanjaAPP . "privatno/polaznici/index.php", "Polaznici"); 
 				stavkaIzbornika($putanjaAPP . "privatno/predavaci/index.php", "Predavači"); 
+				if($_SESSION[$appID."autoriziran"]->uloga==="admin"){
+					stavkaIzbornika($putanjaAPP . "privatno/operateri/index.php", "Operateri"); 
+				}
 				?>
 			</ul>
 		</li>
