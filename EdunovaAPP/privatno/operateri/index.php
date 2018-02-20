@@ -1,5 +1,8 @@
 <?php include_once '../../konfiguracija.php'; 
 provjeraOvlasti();
+
+$stranica = isset($_GET["stranica"]) ? $_GET["stranica"] : 1;
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
@@ -13,6 +16,42 @@ provjeraOvlasti();
       	
       	<div class="grid-x grid-padding-x">
 			<div class="large-12 cell">
+				
+				<form method="get">
+					<input type="text" name="uvjet" 
+					placeholder="uvjet pretraživanja (ime, prezime, email ili lozinka)"
+					value="<?php echo isset($_GET["uvjet"]) ? $_GET["uvjet"] : "" ?>" />
+				</form>
+				<?php
+					
+					$uvjet = "%" . (isset($_GET["uvjet"]) ? $_GET["uvjet"] : "") . "%";
+					
+					$izraz = $veza->prepare("select count(*) from operater 
+					where concat(ime,prezime,email,uloga) like :uvjet");
+					$izraz->execute(array("uvjet"=>$uvjet));
+					$ukupnoRedova = $izraz->fetchColumn();
+					$ukupnoStranica = ceil($ukupnoRedova/$brojRezultataPoStranici);
+					
+					if($stranica<1){
+						$stranica=1;
+					}
+					if($ukupnoStranica>0 && $stranica>$ukupnoStranica){
+						$stranica=$ukupnoStranica;
+					}
+					
+
+					$izraz = $veza->prepare("select * from operater 
+					where concat(ime,prezime,email,uloga) like :uvjet
+					order by uloga, prezime, ime limit :stranica, :brojRezultataPoStranici");
+					$izraz->bindValue("stranica", $stranica* $brojRezultataPoStranici -  $brojRezultataPoStranici , PDO::PARAM_INT);
+					$izraz->bindValue("brojRezultataPoStranici", $brojRezultataPoStranici, PDO::PARAM_INT);
+					$izraz->bindParam("uvjet", $uvjet);
+					$izraz->execute();
+					$rezultati = $izraz->fetchAll(PDO::FETCH_OBJ);
+				if($ukupnoRedova>$brojRezultataPoStranici){
+					include 'paginacija.php';
+				}
+				  ?>
 				<table>
 					<thead>
 						<tr>
@@ -24,10 +63,7 @@ provjeraOvlasti();
 					</thead>
 					<tbody>
 						
-					<?php 
-					$izraz = $veza->prepare("select * from operater order by uloga, prezime, ime;");
-					$izraz->execute();
-					$rezultati = $izraz->fetchAll(PDO::FETCH_OBJ);
+					<?php
 					foreach ($rezultati as $red):
 					?>
 						
@@ -55,7 +91,9 @@ provjeraOvlasti();
 						
 					</tbody>
 				</table>
-				
+				<?php if($ukupnoRedova>$brojRezultataPoStranici){
+					include 'paginacija.php';
+				}?>
 			</div>
 		</div>
 		<?php include_once '../../include/podnozje.php'; ?>

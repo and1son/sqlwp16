@@ -8,6 +8,7 @@ $putanjaAPP = "/EdunovaAPP/";
 $naslovAPP="Edunova APP";
 $appID="EDUNOVAAPP";
 $dev=true;
+$brojRezultataPoStranici=5;
 
 $host="localhost";
 $dbname="edunovapp16";

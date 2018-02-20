@@ -1,7 +1,5 @@
 # sipavanje baze
 # c:\xampp\mysql\bin\mysql.exe -uedunova -pedunova --default_character_set=utf8 < C:\xampp\htdocs\EdunovaAPP\skriptapp16.sql
-# drugi folder
-
 
 drop database if exists edunovapp16;
 create database edunovapp16 character set utf8 collate utf8_croatian_ci;

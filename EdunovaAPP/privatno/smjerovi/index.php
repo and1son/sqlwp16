@@ -20,6 +20,7 @@ provjeraOvlasti();
       	
       	<div class="grid-x grid-padding-x">
 			<div class="large-12 cell">
+				<a href="novi.php" class="button expanded"><i class="fas fa-plus-circle fa-2x"></i></a>
 				<table>
 					<thead>
 						<tr>
@@ -34,7 +35,11 @@ provjeraOvlasti();
 						
 					<?php 
 					$format = new NumberFormatter("hr_HR",NumberFormatter::CURRENCY);
-					$izraz = $veza->prepare("select * from smjer order by naziv;");
+					$izraz = $veza->prepare("select a.sifra, a.naziv,a.cijena,
+					a.upisnina,a.brojsati, count(b.sifra) as grupa from smjer a left join grupa b
+					on a.sifra=b.smjer
+					group by a.sifra, a.naziv,a.cijena, a.upisnina,a.brojsati
+					 order by a.naziv;");
 					$izraz->execute();
 					$rezultati = $izraz->fetchAll(PDO::FETCH_OBJ);
 					foreach ($rezultati as $red):
@@ -46,8 +51,10 @@ provjeraOvlasti();
 							<td><?php echo $format->format($red->upisnina); ?></td>
 							<td><?php echo $red->brojsati; ?></td>
 							<td>
-								<a href="#"><i class="far fa-edit fa-2x"></i></a>
-								<a href="#"><i class="far fa-trash-alt fa-2x"></i></a>   
+								<a href="promjena.php?sifra=<?php echo $red->sifra; ?>"><i class="far fa-edit fa-2x"></i></a>
+								<?php if($red->grupa==0): ?>
+								<a href="brisanje.php?sifra=<?php echo $red->sifra; ?>"><i class="far fa-trash-alt fa-2x"></i></a>
+								<?php endif; ?>   
 							</td>
 						</tr>
 						
