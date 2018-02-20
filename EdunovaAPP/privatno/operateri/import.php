@@ -19,7 +19,16 @@ for($i=0;$i<10000;$i++){
 	$prezime= str_replace("'", "''", $prezime);
 	$svi .= " 
 ('" . substr(strtolower($ime), 0,1) . strtolower($prezime) ."@edunova.hr',md5('e'),'" . $ime . "',
-'" . $prezime . "','oper'),";
+'" . $prezime . "','oper')";
+
+if ($i%1000==0){
+	$svi .=";\n";
+	$svi .= "insert into operater (email,lozinka,ime,prezime,uloga) values";
+}else{
+	$svi .= ",";
+}
+
+
 }
 $svi=substr($svi, 0,strlen($svi)-1) . ";";
 echo $svi;
